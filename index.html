@@ -366,7 +366,11 @@ legend{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transfo
   font-size:1.6rem;text-transform:uppercase;padding:16px 30px;border-radius:999px;box-shadow:6px 6px 0 var(--bg);transition:transform .15s,box-shadow .15s}
 .send:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--bg)}
 .send:active{transform:translate(4px,4px);box-shadow:2px 2px 0 var(--bg)}
-.form-note{font-size:.85rem;color:#4b4741;min-height:1.3em}
+.form-note{font-size:.95rem;color:#4b4741;min-height:1.3em;font-weight:500}
+.form-note.ok{color:#1d7a3a}
+.form-note.err{color:#c21c08}
+.send:disabled{opacity:.6;cursor:wait;transform:none}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}   /* spam trap: bots tick it, people never see it */
 
 /* ---------- FOOTER ---------- */
 footer{background:var(--ink);color:var(--bg);padding:0 var(--gutter) 24px;overflow:hidden}
@@ -591,6 +595,7 @@ footer{background:var(--ink);color:var(--bg);padding:0 var(--gutter) 24px;overfl
         </div>
       </fieldset>
       <label class="f">Tell us about it<textarea name="msg" placeholder="Your space, what you want to achieve, any existing equipment…"></textarea></label>
+      <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
       <button class="send" type="submit">Send it ⚡</button>
       <p class="form-note" id="note" role="status"></p>
     </form>
@@ -609,8 +614,9 @@ footer{background:var(--ink);color:var(--bg);padding:0 var(--gutter) 24px;overfl
 </footer>
 
 <script>
-/* ===== CONFIG: put your real booking email here ===== */
-const BOOKING_EMAIL = "bookings@example.com";
+/* ===== CONFIG: Web3Forms access key (free from web3forms.com, emailed to the inbox that should receive enquiries).
+   It is designed to be public, so it is safe in this file. ===== */
+const WEB3FORMS_KEY = "c76d8731-cb4a-4ed8-ba1f-c3899184c53e";
 
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 document.getElementById("yr").textContent = new Date().getFullYear();
@@ -785,16 +791,42 @@ spot.addEventListener("pointermove", e => {
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }), {threshold:.15});
 document.querySelectorAll(".rv").forEach(el => io.observe(el));
 
-/* ---------- Booking form → opens the visitor's email app ---------- */
-document.getElementById("form").addEventListener("submit", e => {
+/* ---------- Enquiry form → Web3Forms (emails each submission to SFL) ---------- */
+const form = document.getElementById("form"), note = document.getElementById("note"), sendBtn = form.querySelector(".send");
+form.addEventListener("submit", async e => {
   e.preventDefault();
-  const f = e.target, note = document.getElementById("note");
-  if (!f.name.value.trim() || !/^\S+@\S+\.\S+$/.test(f.email.value)){ note.textContent = "Pop in your name and a valid email first."; return; }
+  const f = form;
+  note.classList.remove("ok", "err");
+  if (!f.name.value.trim() || !/^\S+@\S+\.\S+$/.test(f.email.value)){ note.textContent = "Pop in your name and a valid email first."; note.classList.add("err"); return; }
+  if (!WEB3FORMS_KEY){ note.textContent = "This form isn't connected yet. Please check back soon."; note.classList.add("err"); return; }
   const needs = [...f.querySelectorAll("[name=need]:checked")].map(c => c.value).join(", ") || "Not sure yet";
   const vtype = (f.querySelector("[name=vtype]:checked") || {}).value || "Not specified";
-  const body = `Name: ${f.name.value}\nEmail: ${f.email.value}\nVenue: ${f.venue.value || "TBC"} (${vtype})\nTown/city: ${f.town.value || "TBC"}\nNeeds: ${needs}\n\n${f.msg.value}`;
-  location.href = `mailto:${BOOKING_EMAIL}?subject=${encodeURIComponent("Venue enquiry – " + (f.venue.value || f.name.value))}&body=${encodeURIComponent(body)}`;
-  note.textContent = "Opening your email app… ⚡";
+  const payload = {
+    access_key: WEB3FORMS_KEY,
+    subject: "Website enquiry – " + (f.venue.value.trim() || f.name.value.trim()),
+    from_name: "SFL Audio & Lighting website",
+    botcheck: f.botcheck.checked,
+    Name: f.name.value.trim(),
+    email: f.email.value.trim(),                 // Web3Forms uses this as the reply-to address
+    "Venue / business": f.venue.value.trim() || "–",
+    "Town / city": f.town.value.trim() || "–",
+    "Project type": vtype,
+    "Services needed": needs,
+    Message: f.msg.value.trim() || "–"
+  };
+  sendBtn.disabled = true; sendBtn.textContent = "Sending…"; note.textContent = "";
+  try {
+    const res = await fetch("https://api.web3forms.com/submit", {method: "POST", headers: {"Content-Type": "application/json", Accept: "application/json"}, body: JSON.stringify(payload)});
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || !data.success) throw new Error(data.message || res.status);
+    f.reset();
+    note.textContent = "Thanks! Your enquiry is on its way and we'll be in touch soon. ⚡"; note.classList.add("ok");
+  } catch (err) {
+    console.warn("Form send failed", err);
+    note.textContent = "Sorry, that didn't send. Please try again in a moment."; note.classList.add("err");
+  } finally {
+    sendBtn.disabled = false; sendBtn.textContent = "Send it ⚡";
+  }
 });
 </script>
 </body>
