@@ -8,15 +8,15 @@ From powerful nightclub sound systems and multi-zone audio distribution to intel
 
 - Location: Adelaide, South Australia, Australia
 - Clients: bars, clubs, pubs, restaurants, hospitality venues, entertainment spaces, commercial premises, private projects
-- Website: https://kianmohr.github.io/SFLAudio/
+- Website: https://sflaudio.com/
 
 ## Services
 
-- [Commercial Audio Installations](https://kianmohr.github.io/SFLAudio/#services): Custom sound systems for bars, clubs, restaurants and commercial spaces. From background music to high-output entertainment systems, designed around the acoustic and operational requirements of the venue.
-- [Lighting Design & Installation](https://kianmohr.github.io/SFLAudio/#services): Intelligent lighting, architectural illumination, DMX control and automated lighting solutions that transform spaces and create memorable environments.
-- [Audio Processing & System Integration](https://kianmohr.github.io/SFLAudio/#services): Advanced signal routing, digital signal processing (DSP), multi-zone audio, system tuning and centralised control, connecting equipment into one cohesive, manageable system.
-- [DJ Booth & Entertainment Systems](https://kianmohr.github.io/SFLAudio/#services): Custom DJ booth integrations, professional audio connectivity, booth monitoring and flexible signal routing for demanding entertainment environments.
-- [System Upgrades & Optimisation](https://kianmohr.github.io/SFLAudio/#services): Assessment of existing audio and lighting installations that aren't performing as they should, troubleshooting technical issues and recommending practical improvements to performance, reliability and usability.
+- [Commercial Audio Installations](https://sflaudio.com/#services): Custom sound systems for bars, clubs, restaurants and commercial spaces. From background music to high-output entertainment systems, designed around the acoustic and operational requirements of the venue.
+- [Lighting Design & Installation](https://sflaudio.com/#services): Intelligent lighting, architectural illumination, DMX control and automated lighting solutions that transform spaces and create memorable environments.
+- [Audio Processing & System Integration](https://sflaudio.com/#services): Advanced signal routing, digital signal processing (DSP), multi-zone audio, system tuning and centralised control, connecting equipment into one cohesive, manageable system.
+- [DJ Booth & Entertainment Systems](https://sflaudio.com/#services): Custom DJ booth integrations, professional audio connectivity, booth monitoring and flexible signal routing for demanding entertainment environments.
+- [System Upgrades & Optimisation](https://sflaudio.com/#services): Assessment of existing audio and lighting installations that aren't performing as they should, troubleshooting technical issues and recommending practical improvements to performance, reliability and usability.
 
 ## How a project works
 
@@ -29,4 +29,4 @@ From powerful nightclub sound systems and multi-zone audio distribution to intel
 
 ## Contact
 
-- [Enquiry form](https://kianmohr.github.io/SFLAudio/#contact): describe the space, the project type and the services needed.
+- [Enquiry form](https://sflaudio.com/#contact): describe the space, the project type and the services needed.
