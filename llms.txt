@@ -1,0 +1,32 @@
+# SFL Audio & Lighting
+
+> Adelaide-based provider of professional audio, lighting and audiovisual solutions. SFL designs, installs and configures custom systems for hospitality venues, entertainment spaces, commercial premises and private projects.
+
+Professional audio. Intelligent lighting. Seamless integration. Designed for your space. Engineered for performance.
+
+From powerful nightclub sound systems and multi-zone audio distribution to intelligent lighting control and complete AV integration, SFL brings technology together to create reliable, high-performance environments. Whether a client is upgrading an existing installation or starting from scratch, SFL develops a solution tailored to their space, operational needs and budget.
+
+- Location: Adelaide, South Australia, Australia
+- Clients: bars, clubs, pubs, restaurants, hospitality venues, entertainment spaces, commercial premises, private projects
+- Website: https://kianmohr.github.io/SFLAudio/
+
+## Services
+
+- [Commercial Audio Installations](https://kianmohr.github.io/SFLAudio/#services): Custom sound systems for bars, clubs, restaurants and commercial spaces. From background music to high-output entertainment systems, designed around the acoustic and operational requirements of the venue.
+- [Lighting Design & Installation](https://kianmohr.github.io/SFLAudio/#services): Intelligent lighting, architectural illumination, DMX control and automated lighting solutions that transform spaces and create memorable environments.
+- [Audio Processing & System Integration](https://kianmohr.github.io/SFLAudio/#services): Advanced signal routing, digital signal processing (DSP), multi-zone audio, system tuning and centralised control, connecting equipment into one cohesive, manageable system.
+- [DJ Booth & Entertainment Systems](https://kianmohr.github.io/SFLAudio/#services): Custom DJ booth integrations, professional audio connectivity, booth monitoring and flexible signal routing for demanding entertainment environments.
+- [System Upgrades & Optimisation](https://kianmohr.github.io/SFLAudio/#services): Assessment of existing audio and lighting installations that aren't performing as they should, troubleshooting technical issues and recommending practical improvements to performance, reliability and usability.
+
+## How a project works
+
+1. Consultation: understanding the space, requirements and goals; identifying challenges and opportunities for a new installation or an upgrade.
+2. System Design: a tailored solution covering equipment selection, system layout, signal distribution, control requirements and future expandability.
+3. Proposal & Quotation: a clear proposal outlining the recommended solution, project scope and estimated costs.
+4. Installation & Integration: installation, equipment configuration, signal routing and integration with existing infrastructure.
+5. Testing & Optimisation: configuring and testing the system, fine-tuning performance, and ensuring controls and functionality meet operational requirements.
+6. Handover & Support: explaining how to operate the new system and guidance on maintaining reliable performance.
+
+## Contact
+
+- [Enquiry form](https://kianmohr.github.io/SFLAudio/#contact): describe the space, the project type and the services needed.
