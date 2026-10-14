@@ -1,0 +1,726 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SFL Audio &amp; Lighting</title>
+<meta name="description" content="SFL Audio & Lighting — Adelaide-based professional audio, lighting and audiovisual solutions. Designed for your space. Engineered for performance.">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0a0a;
+  --bg-2:#141414;
+  --ink:#f4f1ea;
+  --ink-dim:#a29d94;
+  --red:#ff2a12;
+  --orange:#ff7a00;
+  --yellow:#ffd500;
+  --line:rgba(244,241,234,.14);
+  --display:"Anton","Impact","Arial Narrow",sans-serif;
+  --body:"Space Grotesk",system-ui,sans-serif;
+  --mono:"Space Mono",ui-monospace,monospace;
+  --gutter:clamp(16px,4vw,56px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:66px}   /* keeps anchored sections clear of the fixed header */
+/* the tilted tickers poke past the edges; clip them so phones never lay out wider than the screen */
+html,body{overflow-x:hidden;overflow-x:clip}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.5;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+::selection{background:var(--red);color:var(--ink)}
+
+/* subtle film grain over everything */
+body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:100;opacity:.07;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain 1s steps(4) infinite}
+@keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-1%)}100%{transform:translate(1%,3%)}}
+
+.mono{font-family:var(--mono);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase}
+
+/* ---------- NAV ---------- */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+  padding:14px var(--gutter);background:rgba(10,10,10,.6);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.wordmark{font-family:var(--display);font-size:1.7rem;letter-spacing:.02em;text-decoration:none;line-height:1}
+.wordmark small{font-family:var(--mono);font-size:.55rem;letter-spacing:.2em;display:block;margin-top:2px}
+nav ul{display:flex;gap:clamp(12px,3vw,32px);list-style:none}
+nav a.link{text-decoration:none;font-family:var(--mono);font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;position:relative}
+nav a.link::after{content:"";position:absolute;left:0;right:100%;bottom:-4px;height:2px;background:currentColor;transition:right .25s}
+nav a.link:hover::after{right:0}
+/* hamburger menu (phones) */
+.burger{display:none;appearance:none;background:none;border:0;cursor:pointer;width:44px;height:44px;margin-right:-10px;position:relative;color:var(--ink)}
+.burger span{position:absolute;left:11px;right:11px;height:2px;background:currentColor;border-radius:2px;transition:transform .3s cubic-bezier(.2,.8,.2,1),opacity .2s}
+.burger span:nth-child(1){top:15px}.burger span:nth-child(2){top:21px}.burger span:nth-child(3){top:27px}
+nav.open .burger span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+nav.open .burger span:nth-child(2){opacity:0}
+nav.open .burger span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.burger:focus-visible{outline:2px solid var(--yellow);outline-offset:2px;border-radius:6px}
+@media (max-width:640px){
+  .burger{display:block}
+  nav ul{position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;padding:8px var(--gutter) 22px;
+    background:rgba(10,10,10,.94);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);
+    visibility:hidden;opacity:0;transform:translateY(-8px);transition:opacity .25s,transform .25s,visibility 0s .25s}
+  nav.open ul{visibility:visible;opacity:1;transform:none;transition:opacity .25s,transform .25s}
+  nav ul li{border-bottom:1px solid var(--line)}
+  nav ul li:last-child{border-bottom:0}
+  nav a.link{display:flex;justify-content:space-between;align-items:center;padding:14px 0;font-family:var(--display);font-size:2rem;letter-spacing:.01em;line-height:1}
+  nav a.link::after{position:static;content:"→";height:auto;background:none;font-family:var(--mono);font-size:1rem;color:var(--orange)}
+  nav li:last-child a.link{color:var(--yellow)}
+}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;isolation:isolate}
+.hero-bg{position:absolute;inset:-4%;z-index:-3;background:#000 url("img/hero.jpg") center/cover no-repeat;
+  animation:drift 22s ease-in-out infinite alternate}
+@media (max-width:900px){.hero-bg{background-image:url("img/hero-sm.jpg")}}
+@media (max-width:640px){.hero-bg{background-size:auto 72%;background-position:center 18%;-webkit-mask-image:linear-gradient(#000 58%,transparent 77%);mask-image:linear-gradient(#000 58%,transparent 77%)}}
+@keyframes drift{from{transform:scale(1.02) translate(0,0)}to{transform:scale(1.08) translate(-1.5%,1%)}}
+.hero::before{content:"";position:absolute;inset:0;z-index:-2;
+  background:linear-gradient(180deg,rgba(10,10,10,.55) 0%,transparent 22%,transparent 55%,rgba(10,10,10,.92) 100%)}
+.hero-flash{position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:0;
+  background:radial-gradient(ellipse at 62% 55%,rgba(255,122,0,.55),rgba(255,42,18,.15) 45%,transparent 70%);transition:opacity .35s ease-out}
+.hero-flash.on{opacity:1;transition:none}
+#bolts{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+/* scanlines */
+.hero .scan{position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.25;
+  background:repeating-linear-gradient(0deg,rgba(0,0,0,.6) 0 1px,transparent 1px 3px)}
+
+.hero-bottom{display:grid;grid-template-columns:1fr auto;align-items:end;gap:24px;padding:0 var(--gutter) 18px}
+.hero-tag{display:flex;flex-direction:column;gap:6px}
+.hero-tag b{font-family:var(--display);font-weight:400;font-size:clamp(1.5rem,2.6vw,2.2rem);text-transform:uppercase;line-height:1}
+.hero-tag b i{font-style:normal;color:var(--yellow)}
+.hero-tag .mono{color:var(--ink-dim);font-size:.68rem}
+
+/* intro statement */
+.intro{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:start}
+@media (max-width:860px){.intro{grid-template-columns:1fr}}
+.intro h1{font-family:var(--display);font-weight:400;font-size:clamp(2.6rem,5.2vw,5.6rem);line-height:.9;text-transform:uppercase;letter-spacing:.005em}
+.intro h1 .hot{color:transparent;-webkit-text-stroke:2px var(--yellow)}
+.intro h1 .hot.r{-webkit-text-stroke-color:var(--red)}
+/* waveform break between intro and services */
+.divider{padding:0 var(--gutter)}
+.divider svg{display:block;width:100%;height:40px;overflow:visible}
+.divider path{fill:none;stroke:url(#wave-grad);stroke-width:2;vector-effect:non-scaling-stroke;filter:drop-shadow(0 0 6px rgba(255,122,0,.5))}
+
+/* text column beside a big heading (intro + services head) */
+.about,.services-head p{display:grid;gap:14px;padding-left:clamp(16px,2vw,28px);border-left:1px solid var(--line);color:var(--ink-dim)}
+@media (max-width:860px){.about,.services-head p{padding:16px 0 0;border-left:0;border-top:1px solid var(--line)}}
+.intro p.lede{font-size:clamp(1.05rem,1.5vw,1.2rem)}
+.intro p.lede b{color:var(--ink);font-weight:500}
+
+.drop{appearance:none;border:0;cursor:pointer;font:inherit;color:var(--bg);background:var(--yellow);
+  display:inline-flex;align-items:center;gap:12px;padding:16px 22px 16px 18px;border-radius:999px;
+  font-family:var(--mono);font-weight:700;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;
+  box-shadow:0 0 0 0 rgba(255,213,0,.6);transition:transform .15s, background .2s;animation:ping 2.2s infinite}
+.drop:hover{transform:translateY(-2px) rotate(-2deg)}
+.drop:active{transform:scale(.96)}
+.drop .ico{width:30px;height:30px;border-radius:50%;background:var(--bg);color:var(--yellow);display:grid;place-items:center;font-size:.8rem}
+.drop[aria-pressed="true"]{background:var(--red);color:var(--ink);animation:none}
+.drop[aria-pressed="true"] .ico{color:var(--red)}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(255,213,0,.55)}80%,100%{box-shadow:0 0 0 22px rgba(255,213,0,0)}}
+.drop-wrap{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.drop-wrap .mono{color:var(--ink-dim);font-size:.65rem}
+
+/* sits on the tilted red ticker: both pivot on the same point (EQ bottom edge = ticker top edge) */
+#eq{display:block;width:100%;height:clamp(60px,10vh,110px);margin-bottom:28px;
+  transform:rotate(-2deg) scale(1.04);transform-origin:50% 100%;opacity:0;transition:opacity .4s}
+.live #eq{opacity:1}
+@media (max-width:640px){.hero-bottom{grid-template-columns:1fr}.drop-wrap{align-items:flex-start}}
+
+/* ---------- TICKER ---------- */
+.ticker{background:var(--red);color:var(--bg);transform:rotate(-2deg) scale(1.04);transform-origin:50% 0;margin:-28px 0 0;position:relative;z-index:5;
+  overflow:hidden;border-block:3px solid var(--bg);padding:10px 0}
+.ticker.alt{background:var(--yellow);transform:rotate(1.5deg) scale(1.04);margin:0}
+.ticker-track{display:flex;width:max-content;animation:tick 26s linear infinite}
+.ticker.alt .ticker-track{animation-direction:reverse;animation-duration:32s}
+.ticker span{font-family:var(--display);font-size:clamp(1.4rem,3.2vw,2.4rem);text-transform:uppercase;white-space:nowrap;padding-right:.6em}
+.ticker span i{font-style:normal;display:inline-block;margin-left:.6em;transform:translateY(-.05em)}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* ---------- SECTIONS ---------- */
+section{padding:clamp(44px,6vw,80px) var(--gutter)}
+.kicker{display:flex;align-items:center;gap:12px;color:var(--orange);margin-bottom:10px}
+.kicker::before{content:"";width:28px;height:2px;background:currentColor}
+h2{font-family:var(--display);font-weight:400;text-transform:uppercase;line-height:.95;font-size:clamp(2.4rem,6.5vw,5.4rem);letter-spacing:.005em}
+h2 em{font-style:normal;color:var(--red)}
+
+/* ---------- SERVICES ---------- */
+.services-head{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:start;margin-bottom:clamp(20px,3vw,32px)}
+.services-head p{margin-top:28px}   /* clears the kicker so it lines up with the heading */
+@media (max-width:860px){.services-head{grid-template-columns:1fr;gap:16px}.services-head p{margin-top:0}}
+.cards{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:18px}
+.cards .card{grid-column:span 2}
+.cards .card:nth-child(n+4){grid-column:span 3}
+@media (max-width:960px){.cards{grid-template-columns:1fr}.cards .card,.cards .card:nth-child(n+4){grid-column:auto}}
+.card{position:relative;background:var(--bg-2);border:1px solid var(--line);border-radius:22px;padding:20px;overflow:hidden;
+  display:flex;flex-direction:column;min-height:380px;transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .3s}
+.card:hover{transform:translateY(-6px) rotate(var(--tilt,-1deg));border-color:var(--accent)}
+.card:nth-child(2){--tilt:1deg}
+.card .num{font-family:var(--mono);font-size:.75rem;color:var(--accent);letter-spacing:.14em}
+.card h3{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(2rem,3.4vw,2.8rem);line-height:.95;margin:auto 0 12px}
+.card p{color:var(--ink-dim);max-width:34ch}
+.card .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.card .tags span{font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--line);padding:5px 9px;border-radius:999px}
+.viz{height:150px;margin:12px 0 16px;position:relative;border-radius:14px;overflow:hidden;background:#000}
+
+/* sound viz: equaliser */
+.viz-sound{display:flex;align-items:flex-end;gap:5px;padding:16px}
+.viz-sound i{flex:1;height:100%;border-radius:3px;transform-origin:bottom;
+  background:linear-gradient(0deg,var(--red),var(--orange) 55%,var(--yellow));
+  animation:bar 1.1s ease-in-out infinite alternate;animation-play-state:paused;transform:scaleY(.25)}
+.card:hover .viz-sound i,.card:focus-within .viz-sound i,.viz-sound.auto i{animation-play-state:running}
+@keyframes bar{0%{transform:scaleY(.12)}100%{transform:scaleY(1)}}
+
+/* lighting viz: moving-head beams */
+.viz-light{background:radial-gradient(ellipse at 50% 120%,#1b0b04,#000 70%)}
+.viz-light .beam{position:absolute;top:-10px;left:var(--x);width:110px;height:230px;transform-origin:50% 0;margin-left:-55px;
+  background:linear-gradient(180deg,var(--c) 0%,transparent 90%);clip-path:polygon(46% 0,54% 0,100% 100%,0 100%);
+  mix-blend-mode:screen;opacity:.85;filter:blur(1px);animation:sweep var(--d) ease-in-out infinite alternate}
+.viz-light .beam:nth-child(1){--x:22%;--c:var(--red);--d:2.6s}
+.viz-light .beam:nth-child(2){--x:50%;--c:var(--yellow);--d:3.4s;animation-direction:alternate-reverse}
+.viz-light .beam:nth-child(3){--x:78%;--c:var(--orange);--d:2.2s}
+.viz-light .head{position:absolute;top:0;width:18px;height:10px;border-radius:0 0 6px 6px;background:#333;left:var(--x);margin-left:-9px}
+.viz-light .head:nth-of-type(4){--x:22%}.viz-light .head:nth-of-type(5){--x:50%}.viz-light .head:nth-of-type(6){--x:78%}
+.viz-light .haze{position:absolute;inset:auto 0 0;height:40%;background:linear-gradient(0deg,rgba(255,122,0,.18),transparent)}
+@keyframes sweep{from{transform:rotate(-28deg)}to{transform:rotate(28deg)}}
+
+/* your-gear viz: knobs + LEDs */
+.viz-gear{display:grid;grid-template-columns:repeat(4,1fr);align-content:center;gap:14px;padding:18px;
+  background:repeating-linear-gradient(90deg,#0c0c0c 0 1px,#000 1px 25%)}
+.knob{aspect-ratio:1;width:min(56px,100%);margin:0 auto;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#4a4a4a,#151515 70%);box-shadow:0 3px 0 #000,inset 0 0 0 2px #222;position:relative;
+  transform:rotate(var(--r,-120deg));transition:transform .8s cubic-bezier(.3,1.6,.4,1)}
+.knob::after{content:"";position:absolute;left:50%;top:8%;width:3px;height:32%;margin-left:-1.5px;border-radius:2px;background:var(--k,var(--ink))}
+.card:hover .knob,.card:focus-within .knob{transform:rotate(var(--to,90deg))}
+.knob:nth-child(1){--to:40deg;--k:var(--red)}.knob:nth-child(2){--to:100deg}.knob:nth-child(3){--to:-30deg;--k:var(--yellow)}.knob:nth-child(4){--to:130deg}
+.leds{grid-column:1/-1;display:flex;gap:4px;justify-content:center}
+.leds b{width:9px;height:9px;border-radius:50%;background:#222}
+.card:hover .leds b{animation:led .9s steps(1) infinite;animation-delay:calc(var(--i)*70ms)}
+@keyframes led{0%{background:#222}30%{background:var(--c,#3dff7a);box-shadow:0 0 8px var(--c,#3dff7a)}70%{background:#222}}
+.leds b:nth-last-child(-n+3){--c:var(--yellow)}.leds b:nth-last-child(-n+1){--c:var(--red)}
+
+.card.sound{--accent:var(--orange)}
+.card.light{--accent:var(--yellow)}
+.card.gear{--accent:var(--red)}
+.card.dj{--accent:var(--orange)}
+.card.upgrade{--accent:var(--yellow)}
+.card:nth-child(4){--tilt:1deg}
+
+/* dj viz: two decks + mixer */
+.viz-dj{display:flex;align-items:center;justify-content:center;gap:clamp(10px,3vw,28px);background:linear-gradient(180deg,#0d0d0d,#000)}
+.platter{position:relative;width:min(118px,30%);aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle,var(--red) 0 15%,#111 16% 18%,transparent 19%),
+    repeating-radial-gradient(circle,#161616 0 2px,#0a0a0a 2px 4px);
+  box-shadow:0 0 0 4px #1d1d1d,0 0 0 5px #000;animation:spin 1.8s linear infinite;animation-play-state:paused}
+.platter::after{content:"";position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,rgba(255,255,255,.14),transparent 12%,transparent 50%,rgba(255,255,255,.08) 60%,transparent 70%)}
+.platter.r::before{content:"";position:absolute;inset:42%;border-radius:50%;background:var(--yellow);z-index:1}
+.card:hover .platter,.card:focus-within .platter,.live .platter{animation-play-state:running}
+@keyframes spin{to{transform:rotate(360deg)}}
+.mixer{width:46px;height:80%;background:#161616;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:space-around;padding:10px 0;position:relative}
+.mixer i{width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#555,#1a1a1a)}
+.mixer b{position:absolute;bottom:10px;left:8px;width:12px;height:8px;border-radius:2px;background:var(--ink);transition:left .5s cubic-bezier(.3,1.6,.4,1)}
+.card:hover .mixer b{left:26px}
+
+/* upgrade viz: messy signal -> clean signal */
+.viz-scope{background:#000;background-image:linear-gradient(rgba(255,213,0,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,213,0,.07) 1px,transparent 1px);background-size:25px 25px}
+.viz-scope svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.viz-scope path{fill:none;stroke-width:2.5;vector-effect:non-scaling-stroke;transition:opacity .6s}
+.viz-scope .noisy{stroke:var(--red);filter:drop-shadow(0 0 4px var(--red))}
+.viz-scope .clean{stroke:var(--yellow);filter:drop-shadow(0 0 4px var(--yellow));opacity:0;animation:scroll 2.4s linear infinite}
+.card:hover .viz-scope .noisy,.card:focus-within .viz-scope .noisy{opacity:0}
+.card:hover .viz-scope .clean,.card:focus-within .viz-scope .clean{opacity:1}
+@keyframes scroll{to{transform:translateX(-150px)}}
+.viz-scope span{position:absolute;top:10px;right:12px;font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;transition:opacity .6s}
+.viz-scope .tag-before{color:var(--red)}
+.viz-scope .tag-after{color:var(--yellow);opacity:0}
+.card:hover .tag-before{opacity:0}.card:hover .tag-after{opacity:1}
+
+/* ---------- SPOTLIGHT ---------- */
+.spot{position:relative;min-height:62svh;display:grid;place-items:center;text-align:center;overflow:hidden;cursor:none;isolation:isolate;
+  background:#000 url("img/grille.jpg") center/cover no-repeat;--x:50%;--y:50%}
+.spot::before{content:"";position:absolute;inset:0;z-index:-1;
+  background:radial-gradient(circle at var(--x) var(--y),rgba(255,213,0,.10) 0,transparent 120px,rgba(0,0,0,.6) 200px,rgba(0,0,0,.96) 340px)}
+.spot .inner{position:relative;pointer-events:none;mix-blend-mode:difference}
+.spot h2{font-size:clamp(3rem,11vw,10rem)}
+.spot p{margin-top:12px}
+@media (hover:none){.spot{cursor:auto}}
+
+/* ---------- PROCESS ---------- */
+.process{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(24px,4vw,56px);align-items:center;
+  background:var(--bg) url("img/crackle.jpg") right top/520px auto repeat;background-blend-mode:normal;position:relative;isolation:isolate}
+.process::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,var(--bg) 40%,rgba(10,10,10,.82))}
+@media (max-width:860px){.process{grid-template-columns:1fr}}
+.process .sub{color:var(--ink-dim);margin-top:10px;font-size:1.1rem}
+.process .closer{font-family:var(--display);text-transform:uppercase;font-size:clamp(1.4rem,2.4vw,2rem);line-height:1;margin-top:20px}
+.process .closer em{font-style:normal;color:var(--orange)}
+.steps{list-style:none;margin-top:18px;counter-reset:s}
+.steps li{display:grid;grid-template-columns:auto 1fr;gap:16px;padding:14px 0;border-top:1px solid var(--line);counter-increment:s}
+.steps li:last-child{border-bottom:1px solid var(--line)}
+.steps li::before{content:counter(s,decimal-leading-zero);font-family:var(--display);font-size:2.4rem;line-height:1;color:transparent;-webkit-text-stroke:1.5px var(--orange)}
+.steps h3{font-family:var(--display);font-weight:400;font-size:1.6rem;text-transform:uppercase;line-height:1}
+.steps p{color:var(--ink-dim);margin-top:6px;max-width:44ch}
+.photo{position:relative;max-width:360px;justify-self:center;transform:rotate(3deg)}
+.photo img{aspect-ratio:3/4;width:100%;max-height:60vh;object-fit:cover;object-position:center 58%;border-radius:18px;border:6px solid var(--ink);box-shadow:16px 16px 0 var(--red)}
+.photo .sticker{position:absolute;left:-28px;bottom:48px;background:var(--yellow);color:var(--bg);font-family:var(--display);
+  text-transform:uppercase;font-size:1.3rem;line-height:1;padding:14px 16px;transform:rotate(-9deg);border-radius:6px;box-shadow:4px 4px 0 var(--bg)}
+
+/* ---------- CONTACT ---------- */
+.contact{background:var(--ink);color:var(--bg);border-radius:clamp(22px,4vw,48px) clamp(22px,4vw,48px) 0 0;margin-top:clamp(16px,3vw,32px)}
+.contact .kicker{color:var(--red)}
+.contact-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(32px,6vw,90px)}
+@media (max-width:860px){.contact-grid{grid-template-columns:1fr}}
+.contact h2 em{color:var(--red)}
+.contact .aside{margin-top:12px;max-width:36ch;color:#4b4741}
+form{display:grid;gap:14px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:560px){.row{grid-template-columns:1fr}}
+label.f{display:grid;gap:6px;font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase}
+input,textarea{font:inherit;font-family:var(--body);font-size:1rem;letter-spacing:0;text-transform:none;color:var(--bg);background:transparent;
+  border:0;border-bottom:2px solid var(--bg);padding:10px 2px;border-radius:0;outline:none;width:100%}
+input:focus,textarea:focus{border-color:var(--red)}
+textarea{resize:vertical;min-height:110px}
+fieldset{border:0}
+legend{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{position:relative}
+.chip input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;pointer-events:none}   /* stays inside its chip, not the page */
+.chip span{display:inline-flex;align-items:center;gap:8px;cursor:pointer;border:2px solid var(--bg);border-radius:999px;padding:10px 16px;font-weight:500;
+  transition:background .15s,color .15s,transform .15s;user-select:none}
+.chip span::before{content:"+";font-family:var(--mono);font-weight:700}
+.chip input:checked+span{background:var(--bg);color:var(--yellow);transform:rotate(-2deg)}
+.chip input:checked+span::before{content:"✓"}
+.chip input:focus-visible+span{outline:3px solid var(--red);outline-offset:2px}
+.send{justify-self:start;appearance:none;border:0;cursor:pointer;background:var(--red);color:var(--ink);font-family:var(--display);
+  font-size:1.6rem;text-transform:uppercase;padding:16px 30px;border-radius:999px;box-shadow:6px 6px 0 var(--bg);transition:transform .15s,box-shadow .15s}
+.send:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--bg)}
+.send:active{transform:translate(4px,4px);box-shadow:2px 2px 0 var(--bg)}
+.form-note{font-size:.85rem;color:#4b4741;min-height:1.3em}
+
+/* ---------- FOOTER ---------- */
+footer{background:var(--ink);color:var(--bg);padding:0 var(--gutter) 24px;overflow:hidden}
+.mega{font-family:var(--display);font-size:clamp(7rem,34vw,30rem);line-height:1;letter-spacing:-.01em;text-align:center;padding-top:.04em;
+  background:url("img/crackle.jpg") center/600px auto;-webkit-background-clip:text;background-clip:text;color:transparent;
+  -webkit-text-stroke:2px var(--bg);user-select:none;margin-bottom:-.08em}
+.foot-row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;border-top:2px solid var(--bg);padding-top:16px;margin-top:12px}
+
+/* reveal on scroll */
+.rv{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .rv{opacity:1;transform:none}
+  .viz-sound i{transform:scaleY(.6)}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a class="wordmark" href="#top" aria-label="SFL Audio & Lighting, home">SFL<small>Audio &amp; Lighting</small></a>
+  <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+  <ul id="menu">
+    <li><a class="link" href="#services">Services</a></li>
+    <li><a class="link" href="#how">How it works</a></li>
+    <li><a class="link" href="#contact">Talk To Us</a></li>
+  </ul>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="scan" aria-hidden="true"></div>
+  <canvas id="bolts" aria-hidden="true"></canvas>
+  <div class="hero-flash" id="flash" aria-hidden="true"></div>
+
+  <div class="hero-bottom">
+    <div class="hero-tag">
+      <b>Designed for your space<i>.</i></b>
+      <span class="mono">Engineered for performance · Adelaide</span>
+    </div>
+    <div class="drop-wrap">
+      <button class="drop" id="drop" aria-pressed="false"><span class="ico" aria-hidden="true">▶</span><span class="lbl">Drop the beat</span></button>
+      <span class="mono">Sound on · Tap the sky for lightning</span>
+    </div>
+  </div>
+  <canvas id="eq" aria-hidden="true"></canvas>
+</header>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>Smarter systems <i>✦</i> Better sound <i>✦</i> Complete control <i>✦</i> Smarter systems <i>✦</i> Better sound <i>✦</i> Complete control <i>✦</i></span>
+    <span>Smarter systems <i>✦</i> Better sound <i>✦</i> Complete control <i>✦</i> Smarter systems <i>✦</i> Better sound <i>✦</i> Complete control <i>✦</i></span>
+  </div>
+</div>
+
+<section class="intro">
+  <h1 class="rv">Professional <span class="hot">audio.</span><br>Intelligent <span class="hot r">lighting.</span><br>Seamless integration.</h1>
+  <div class="about">
+    <p class="lede rv"><b>SFL Audio &amp; Lighting is an Adelaide-based provider of professional audio, lighting and audiovisual solutions.</b></p>
+    <p class="rv">We specialise in designing, installing and configuring custom systems for hospitality venues, entertainment spaces, commercial premises and private projects.</p>
+    <p class="rv">From powerful nightclub sound systems and multi-zone audio distribution to intelligent lighting control and complete AV integration, we bring technology together to create reliable, high-performance environments.</p>
+  </div>
+</section>
+
+<div class="divider" aria-hidden="true">
+  <svg viewBox="0 0 1200 40" preserveAspectRatio="none">
+    <defs><linearGradient id="wave-grad" x1="0" x2="1"><stop offset="0" stop-color="#ff2a12"/><stop offset=".5" stop-color="#ffd500"/><stop offset="1" stop-color="#ff2a12"/></linearGradient></defs>
+    <path d="M0 20.0 L6 20.0 L12 20.0 L18 20.0 L24 20.0 L30 20.0 L36 20.0 L42 20.0 L48 20.0 L54 20.0 L60 20.0 L66 20.0 L72 20.0 L78 20.0 L84 20.0 L90 20.0 L96 20.0 L102 20.0 L108 20.0 L114 20.0 L120 20.0 L126 20.0 L132 20.0 L138 20.0 L144 20.0 L150 20.0 L156 20.0 L162 20.0 L168 20.0 L174 20.0 L180 20.0 L186 20.0 L192 20.0 L198 20.0 L204 20.0 L210 20.0 L216 20.0 L222 20.0 L228 20.0 L234 20.0 L240 20.0 L246 20.0 L252 20.0 L258 20.0 L264 20.0 L270 20.0 L276 20.0 L282 20.0 L288 20.0 L294 20.0 L300 20.0 L306 20.0 L312 20.0 L318 20.0 L324 20.0 L330 20.0 L336 20.0 L342 20.0 L348 20.1 L354 20.1 L360 20.0 L366 19.9 L372 19.9 L378 20.2 L384 20.4 L390 19.9 L396 19.1 L402 19.5 L408 21.3 L414 21.9 L420 19.4 L426 16.8 L432 18.6 L438 23.1 L444 23.6 L450 18.9 L456 15.9 L462 18.6 L468 22.7 L474 22.6 L480 19.3 L486 17.9 L492 19.4 L498 21.3 L504 21.4 L510 19.4 L516 17.3 L522 18.8 L528 24.0 L534 25.2 L540 17.6 L546 10.4 L552 16.5 L558 30.0 L564 30.9 L570 15.6 L576 5.7 L582 15.8 L588 30.8 L594 29.7 L600 16.5 L606 11.5 L612 18.2 L618 24.0 L624 22.9 L630 19.0 L636 17.3 L642 19.2 L648 22.8 L654 23.2 L660 18.2 L666 14.0 L672 18.3 L678 26.5 L684 26.3 L690 16.8 L696 11.7 L702 18.1 L708 26.4 L714 25.1 L720 17.7 L726 15.2 L732 19.2 L738 22.6 L744 21.7 L750 19.3 L756 18.8 L762 19.8 L768 20.6 L774 20.5 L780 19.7 L786 19.1 L792 19.8 L798 21.0 L804 20.9 L810 19.5 L816 18.8 L822 19.8 L828 20.8 L834 20.5 L840 19.7 L846 19.6 L852 20.0 L858 20.1 L864 20.0 L870 20.0 L876 20.0 L882 20.0 L888 20.0 L894 20.0 L900 20.0 L906 20.0 L912 20.0 L918 20.0 L924 20.0 L930 20.0 L936 20.0 L942 20.0 L948 20.0 L954 20.0 L960 20.0 L966 20.0 L972 20.0 L978 20.0 L984 20.0 L990 20.0 L996 20.0 L1002 20.0 L1008 20.0 L1014 20.0 L1020 20.0 L1026 20.0 L1032 20.0 L1038 20.0 L1044 20.0 L1050 20.0 L1056 20.0 L1062 20.0 L1068 20.0 L1074 20.0 L1080 20.0 L1086 20.0 L1092 20.0 L1098 20.0 L1104 20.0 L1110 20.0 L1116 20.0 L1122 20.0 L1128 20.0 L1134 20.0 L1140 20.0 L1146 20.0 L1152 20.0 L1158 20.0 L1164 20.0 L1170 20.0 L1176 20.0 L1182 20.0 L1188 20.0 L1194 20.0 L1200 20.0"/>
+  </svg>
+</div>
+
+<section id="services">
+  <div class="services-head">
+    <div>
+      <div class="kicker mono">What we do</div>
+      <h2 class="rv">Pick your<br><em>mix.</em></h2>
+    </div>
+    <p class="rv">Whether you're upgrading an existing installation or starting from scratch, we work with you to develop a solution tailored to your space, operational needs and budget.</p>
+  </div>
+
+  <div class="cards">
+    <article class="card sound rv" tabindex="0">
+      <span class="num">01 / SOUND</span>
+      <div class="viz viz-sound" aria-hidden="true">
+        <i style="animation-delay:-.1s"></i><i style="animation-delay:-.7s"></i><i style="animation-delay:-.3s"></i><i style="animation-delay:-.9s"></i>
+        <i style="animation-delay:-.5s"></i><i style="animation-delay:-.2s"></i><i style="animation-delay:-.8s"></i><i style="animation-delay:-.4s"></i>
+        <i style="animation-delay:-.6s"></i><i style="animation-delay:-1s"></i><i style="animation-delay:-.15s"></i><i style="animation-delay:-.45s"></i>
+        <i style="animation-delay:-.75s"></i><i style="animation-delay:-.35s"></i>
+      </div>
+      <h3>Commercial Audio<br>Installations</h3>
+      <p>Custom sound systems for bars, clubs, restaurants and commercial spaces. From background music to high-output entertainment systems, we design audio solutions around the acoustic and operational requirements of your venue.</p>
+      <div class="tags"><span>Bars</span><span>Clubs</span><span>Restaurants</span><span>Commercial</span></div>
+    </article>
+
+    <article class="card light rv" tabindex="0">
+      <span class="num">02 / LIGHT</span>
+      <div class="viz viz-light" aria-hidden="true">
+        <div class="beam"></div><div class="beam"></div><div class="beam"></div>
+        <div class="head"></div><div class="head"></div><div class="head"></div>
+        <div class="haze"></div>
+      </div>
+      <h3>Lighting Design<br>&amp; Installation</h3>
+      <p>Intelligent lighting, architectural illumination, DMX control and automated lighting solutions that transform spaces and create memorable environments.</p>
+      <div class="tags"><span>Intelligent</span><span>Architectural</span><span>DMX</span><span>Automated</span></div>
+    </article>
+
+    <article class="card gear rv" tabindex="0">
+      <span class="num">03 / INTEGRATION</span>
+      <div class="viz viz-gear" aria-hidden="true">
+        <div class="knob"></div><div class="knob"></div><div class="knob"></div><div class="knob"></div>
+        <div class="leds">
+          <b style="--i:0"></b><b style="--i:1"></b><b style="--i:2"></b><b style="--i:3"></b><b style="--i:4"></b>
+          <b style="--i:5"></b><b style="--i:6"></b><b style="--i:7"></b><b style="--i:8"></b><b style="--i:9"></b>
+        </div>
+      </div>
+      <h3>Audio Processing &amp;<br>System Integration</h3>
+      <p>Advanced signal routing, digital signal processing, multi-zone audio, system tuning and centralised control. We connect your equipment into one cohesive, manageable system.</p>
+      <div class="tags"><span>DSP</span><span>Routing</span><span>Multi-zone</span><span>Control</span></div>
+    </article>
+
+    <article class="card dj rv" tabindex="0">
+      <span class="num">04 / DJ BOOTH</span>
+      <div class="viz viz-dj" aria-hidden="true">
+        <div class="platter"></div>
+        <div class="mixer"><i></i><i></i><i></i><b></b></div>
+        <div class="platter r"></div>
+      </div>
+      <h3>DJ Booth &amp;<br>Entertainment Systems</h3>
+      <p>Custom DJ booth integrations, professional audio connectivity, booth monitoring and flexible signal routing designed for demanding entertainment environments.</p>
+      <div class="tags"><span>Booth integration</span><span>Monitoring</span><span>Routing</span></div>
+    </article>
+
+    <article class="card upgrade rv" tabindex="0">
+      <span class="num">05 / UPGRADES</span>
+      <div class="viz viz-scope" aria-hidden="true">
+        <svg viewBox="0 0 400 150" preserveAspectRatio="none">
+          <path class="noisy" d="M0 75 L20 40 L35 110 L50 52 L62 98 L80 30 L95 120 L110 60 L125 88 L140 25 L158 115 L172 48 L190 100 L205 35 L220 118 L238 55 L250 92 L268 28 L285 112 L300 45 L318 105 L330 38 L348 120 L362 58 L380 95 L400 75"/>
+          <path class="clean" d="M0 75 C25 25 50 25 75 75 S125 125 150 75 S200 25 225 75 S275 125 300 75 S350 25 375 75 S425 125 450 75 S500 25 525 75 S575 125 600 75 S650 25 675 75 S725 125 750 75 S800 25 825 75"/>
+        </svg>
+        <span class="tag-before">Before</span><span class="tag-after">After</span>
+      </div>
+      <h3>System Upgrades<br>&amp; Optimisation</h3>
+      <p>Already have an audio or lighting system that isn't performing as it should? We assess existing installations, troubleshoot technical issues and recommend practical improvements to performance, reliability and usability.</p>
+      <div class="tags"><span>Assessment</span><span>Troubleshooting</span><span>Improvements</span></div>
+    </article>
+  </div>
+</section>
+
+<div class="ticker alt" aria-hidden="true">
+  <div class="ticker-track">
+    <span>Hospitality <i>●</i> Entertainment <i>●</i> Commercial <i>●</i> Private projects <i>●</i> Hospitality <i>●</i> Entertainment <i>●</i> Commercial <i>●</i> Private projects <i>●</i></span>
+    <span>Hospitality <i>●</i> Entertainment <i>●</i> Commercial <i>●</i> Private projects <i>●</i> Hospitality <i>●</i> Entertainment <i>●</i> Commercial <i>●</i> Private projects <i>●</i></span>
+  </div>
+</div>
+
+<section class="spot" id="spot" aria-label="Spotlight">
+  <div class="inner">
+    <h2>Find the<br>light.</h2>
+    <p class="mono">Move your cursor around</p>
+  </div>
+</section>
+
+<section class="process" id="how">
+  <div>
+    <div class="kicker mono">How it works</div>
+    <h2 class="rv">From concept<br>to <em>completion.</em></h2>
+    <p class="sub rv">Your vision. Our technical expertise.</p>
+    <ol class="steps">
+      <li class="rv"><div><h3>Consultation</h3><p>We start by understanding your space, requirements and what you want to achieve. Whether it's a new installation or an upgrade, we identify the challenges and opportunities.</p></div></li>
+      <li class="rv"><div><h3>System Design</h3><p>We develop a tailored solution, considering equipment selection, system layout, signal distribution, control requirements and future expandability.</p></div></li>
+      <li class="rv"><div><h3>Proposal &amp; Quotation</h3><p>You'll receive a clear proposal outlining the recommended solution, project scope and estimated costs.</p></div></li>
+      <li class="rv"><div><h3>Installation &amp; Integration</h3><p>We bring the system together through installation, equipment configuration, signal routing and integration with your existing infrastructure.</p></div></li>
+      <li class="rv"><div><h3>Testing &amp; Optimisation</h3><p>We configure and test the system, fine-tuning its performance and ensuring the controls and functionality meet your operational requirements.</p></div></li>
+      <li class="rv"><div><h3>Handover &amp; Support</h3><p>We explain how to operate your new system and provide guidance on maintaining reliable performance.</p></div></li>
+    </ol>
+    <p class="closer rv">Built around your needs. <em>Designed to perform.</em></p>
+  </div>
+  <figure class="photo rv">
+    <img src="img/badge-tall.jpg" alt="Close-up of an SFL Audio & Lighting speaker grille with its round metal badge" loading="lazy" width="800" height="1733">
+    <div class="sticker">Built<br>to bang</div>
+  </figure>
+</section>
+
+<section class="contact" id="contact">
+  <div class="contact-grid">
+    <div>
+      <div class="kicker mono">Talk To Us</div>
+      <h2>Let's make<br>some <em>noise.</em></h2>
+      <p class="aside">Upgrading an existing installation or starting from scratch? Tell us about your space and what you want to achieve.</p>
+    </div>
+    <form id="form" novalidate>
+      <div class="row">
+        <label class="f">Name<input name="name" autocomplete="name" required></label>
+        <label class="f">Email<input name="email" type="email" autocomplete="email" required></label>
+      </div>
+      <div class="row">
+        <label class="f">Venue name<input name="venue" autocomplete="organization"></label>
+        <label class="f">Town / city<input name="town" autocomplete="address-level2"></label>
+      </div>
+      <fieldset>
+        <legend>Type of project</legend>
+        <div class="chips">
+          <label class="chip"><input type="radio" name="vtype" value="Hospitality venue"><span>Hospitality</span></label>
+          <label class="chip"><input type="radio" name="vtype" value="Entertainment space"><span>Entertainment</span></label>
+          <label class="chip"><input type="radio" name="vtype" value="Commercial premises"><span>Commercial</span></label>
+          <label class="chip"><input type="radio" name="vtype" value="Private project"><span>Private project</span></label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>What do you need?</legend>
+        <div class="chips">
+          <label class="chip"><input type="checkbox" name="need" value="Commercial audio installation"><span>Commercial audio</span></label>
+          <label class="chip"><input type="checkbox" name="need" value="Lighting design & installation"><span>Lighting</span></label>
+          <label class="chip"><input type="checkbox" name="need" value="Audio processing & system integration"><span>Processing &amp; integration</span></label>
+          <label class="chip"><input type="checkbox" name="need" value="DJ booth & entertainment systems"><span>DJ booth</span></label>
+          <label class="chip"><input type="checkbox" name="need" value="System upgrades & optimisation"><span>Upgrades &amp; optimisation</span></label>
+        </div>
+      </fieldset>
+      <label class="f">Tell us about it<textarea name="msg" placeholder="Your space, what you want to achieve, any existing equipment…"></textarea></label>
+      <button class="send" type="submit">Send it ⚡</button>
+      <p class="form-note" id="note" role="status"></p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="mega" aria-hidden="true">SFL</div>
+  <div class="foot-row mono">
+    <span>© <span id="yr"></span> SFL Audio &amp; Lighting</span>
+    <a href="#top">Back to top ↑</a>
+  </div>
+</footer>
+
+<script>
+/* ===== CONFIG: put your real booking email here ===== */
+const BOOKING_EMAIL = "bookings@example.com";
+
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+document.getElementById("yr").textContent = new Date().getFullYear();
+
+/* ---------- Mobile menu ---------- */
+const nav = document.getElementById("nav"), burger = document.getElementById("burger");
+function setMenu(open){ nav.classList.toggle("open", open); burger.setAttribute("aria-expanded", open); }
+burger.addEventListener("click", () => setMenu(!nav.classList.contains("open")));
+nav.querySelectorAll("#menu a").forEach(a => a.addEventListener("click", () => setMenu(false)));
+addEventListener("keydown", e => { if (e.key === "Escape" && nav.classList.contains("open")){ setMenu(false); burger.focus(); } });
+matchMedia("(min-width:641px)").addEventListener("change", e => { if (e.matches) setMenu(false); });
+
+/* ---------- Lightning ---------- */
+const bc = document.getElementById("bolts"), bx = bc.getContext("2d");
+const hero = document.querySelector(".hero"), flash = document.getElementById("flash");
+let bolts = [], dpr = Math.min(devicePixelRatio || 1, 2);
+function sizeBolts(){ bc.width = bc.clientWidth*dpr; bc.height = bc.clientHeight*dpr; }
+sizeBolts(); addEventListener("resize", sizeBolts);
+
+function makeBolt(x, y, tx, ty, depth = 0){
+  const pts = [[x, y]], segs = 18 + Math.random()*10, branches = [];
+  for (let i = 1; i <= segs; i++){
+    const t = i/segs;
+    const px = x + (tx-x)*t + (Math.random()-.5)*60*dpr*(1-t*.5);
+    const py = y + (ty-y)*t + (Math.random()-.5)*14*dpr;
+    pts.push([px, py]);
+    if (depth < 2 && Math.random() < .14){
+      const len = (90 + Math.random()*160)*dpr;
+      const ang = Math.atan2(ty-y, tx-x) + (Math.random()-.5)*1.6;
+      branches.push(makeBolt(px, py, px+Math.cos(ang)*len, py+Math.sin(ang)*len, depth+1));
+    }
+  }
+  return {pts, branches, w: (3-depth)*dpr};
+}
+function strike(x, y){
+  const W = bc.width, H = bc.height;
+  x = x ?? Math.random()*W; y = y ?? H*(.45+Math.random()*.35);
+  bolts.push({b: makeBolt(x + (Math.random()-.5)*W*.3, -10, x, y), life: 1});
+  flash.classList.add("on"); requestAnimationFrame(()=>requestAnimationFrame(()=>flash.classList.remove("on")));
+  if (!drawing){ drawing = true; requestAnimationFrame(drawBolts); }
+}
+function path(b, alpha){
+  bx.beginPath(); b.pts.forEach(([x,y],i)=> i ? bx.lineTo(x,y) : bx.moveTo(x,y));
+  bx.globalAlpha = alpha; bx.lineWidth = b.w*3; bx.strokeStyle = "rgba(255,150,40,.5)"; bx.stroke();
+  bx.lineWidth = b.w; bx.strokeStyle = "#fff"; bx.stroke();
+  b.branches.forEach(c => path(c, alpha*.7));
+}
+let drawing = false;
+function drawBolts(){
+  bx.clearRect(0,0,bc.width,bc.height);
+  bx.shadowColor = "#ffb347"; bx.shadowBlur = 18*dpr; bx.lineCap = bx.lineJoin = "round";
+  bolts.forEach(o => { const flick = o.life > .6 ? (Math.random() > .3 ? 1 : .3) : o.life; path(o.b, flick); o.life -= .035; });
+  bolts = bolts.filter(o => o.life > 0);
+  bx.globalAlpha = 1;
+  if (bolts.length) requestAnimationFrame(drawBolts); else { drawing = false; bx.clearRect(0,0,bc.width,bc.height); }
+}
+hero.addEventListener("pointerdown", e => {
+  if (e.target.closest("button,a")) return;
+  const r = bc.getBoundingClientRect();
+  strike((e.clientX-r.left)*dpr, (e.clientY-r.top)*dpr);
+  if (audio.ctx && audio.playing) zap();
+});
+let heroVisible = true;
+new IntersectionObserver(([e]) => heroVisible = e.isIntersecting).observe(hero);
+
+/* ---------- Track playback ---------- */
+const track = new Audio("audio/sfl-track.mp3");
+track.preload = "none";   // plays once; the button resets when it ends
+const BPM = 140;
+const audio = {ctx:null, playing:false, live:false, beatAvg:0, lastBeat:0, beats:0};
+function initAudio(){
+  const ctx = new (window.AudioContext || window.webkitAudioContext)();
+  const master = ctx.createGain(); master.gain.value = .55;
+  master.connect(ctx.destination);
+  Object.assign(audio, {ctx, master});
+  // Chrome silences analysed media opened from file://, so only analyse when served over http(s)
+  if (location.protocol !== "file:"){
+    const an = ctx.createAnalyser(); an.fftSize = 256; an.smoothingTimeConstant = .6;
+    an.minDecibels = -75; an.maxDecibels = -5;   // mastered tracks clip the default -30dB ceiling
+    ctx.createMediaElementSource(track).connect(an).connect(ctx.destination);
+    Object.assign(audio, {an, live:true, bins: new Uint8Array(an.frequencyBinCount)});
+  }
+}
+function env(g, t, peak, dec){ g.gain.setValueAtTime(peak, t); g.gain.exponentialRampToValueAtTime(.0001, t+dec); }
+function zap(){ const {ctx,master}=audio, t=ctx.currentTime, o=ctx.createOscillator(), g=ctx.createGain();
+  o.type="square"; o.frequency.setValueAtTime(1800,t); o.frequency.exponentialRampToValueAtTime(90,t+.25); env(g,t,.12,.25);
+  o.connect(g).connect(master); o.start(t); o.stop(t+.3); }
+// flash the hero on each detected kick, strike lightning every 8th one
+function onBeat(){
+  audio.beats++;
+  if (reduce) return;
+  flash.classList.add("on"); setTimeout(()=>flash.classList.remove("on"), 40);
+  if (audio.beats % 8 === 0) strike();
+}
+function detectBeat(now){
+  let e = 0; for (let i=1;i<5;i++) e += audio.bins[i]; e /= 4*255;
+  audio.beatAvg = audio.beatAvg*.92 + e*.08;
+  if (e > .4 && e > audio.beatAvg*1.07 && now - audio.lastBeat > 300){ audio.lastBeat = now; onBeat(); }
+}
+
+const dropBtn = document.getElementById("drop");
+function setPlaying(on){
+  audio.playing = on;
+  dropBtn.setAttribute("aria-pressed", on);
+  dropBtn.querySelector(".lbl").textContent = on ? "Kill the beat" : "Drop the beat";
+  dropBtn.querySelector(".ico").textContent = on ? "■" : "▶";
+  document.querySelectorAll(".viz-sound").forEach(v => v.classList.toggle("auto", on));
+  document.body.classList.toggle("live", on);
+  if (on){ eqLevels = []; ex.clearRect(0,0,eq.width,eq.height); }
+  else { bolts = []; bx.clearRect(0,0,bc.width,bc.height); flash.classList.remove("on"); }   // stop all effects at once
+}
+dropBtn.addEventListener("click", async () => {
+  if (!audio.ctx) initAudio();
+  if (audio.ctx.state === "suspended") await audio.ctx.resume();
+  if (audio.playing){ track.pause(); setPlaying(false); return; }
+  try { await track.play(); } catch (err) { console.warn("Track failed to play", err); return; }
+  setPlaying(true); strike();
+});
+track.addEventListener("pause", () => { if (audio.playing) setPlaying(false); });
+
+/* ---------- EQ strip ---------- */
+const eq = document.getElementById("eq"), ex = eq.getContext("2d");
+let eqLevels = [];
+function sizeEq(){ eq.width = eq.clientWidth*dpr; eq.height = eq.clientHeight*dpr; }
+sizeEq(); addEventListener("resize", sizeEq);
+function drawEq(now){
+  requestAnimationFrame(drawEq);
+  if (!heroVisible || !audio.playing) return;   // hidden when silent; last frame fades out with the canvas
+  const W = eq.width, H = eq.height, n = Math.max(24, Math.floor(W/(14*dpr))), gap = 3*dpr, bw = (W - gap*(n-1))/n;
+  if (audio.playing && audio.live){ audio.an.getByteFrequencyData(audio.bins); detectBeat(now); }
+  else if (audio.playing){   // no analyser (file://): pulse at the track tempo, locked to its playhead
+    const ph = (track.currentTime * BPM / 60) % 1, pulse = Math.pow(1-ph, 3);
+    if (ph < audio.lastPh) onBeat();
+    audio.lastPh = ph;
+    audio.fake = (i, n) => Math.min(1, .25 + .6*pulse*(1-i/n) + .25*Math.random()*(.4+pulse));
+  }
+  ex.clearRect(0,0,W,H);
+  const grad = ex.createLinearGradient(0,H,0,0);
+  grad.addColorStop(0,"#ff2a12"); grad.addColorStop(.55,"#ff7a00"); grad.addColorStop(1,"#ffd500");
+  ex.fillStyle = grad;
+  for (let i=0;i<n;i++){
+    let v;
+    if (audio.playing && audio.live){ const bi = Math.floor(Math.pow(i/n, 1.6)*audio.bins.length*.85); v = audio.bins[bi]/255; }
+    else v = audio.fake(i, n);
+    eqLevels[i] = Math.max(v, (eqLevels[i]||0) - .025);
+    const h = Math.max(2*dpr, eqLevels[i]*H);
+    const segH = 5*dpr;   // chunky LED segments
+    for (let y = 0; y < h; y += segH + 2*dpr) ex.fillRect(i*(bw+gap), H - y - segH, bw, segH);
+  }
+}
+requestAnimationFrame(drawEq);
+
+/* ---------- Spotlight ---------- */
+const spot = document.getElementById("spot");
+let lastMove = 0;
+spot.addEventListener("pointermove", e => {
+  const r = spot.getBoundingClientRect();
+  spot.style.setProperty("--x", (e.clientX - r.left) + "px");
+  spot.style.setProperty("--y", (e.clientY - r.top) + "px");
+  lastMove = performance.now();
+});
+(function sweep(now){
+  requestAnimationFrame(sweep);
+  if (reduce || now - lastMove < 2500) return;
+  const r = spot.getBoundingClientRect();
+  if (r.bottom < 0 || r.top > innerHeight) return;
+  spot.style.setProperty("--x", (r.width*(.5 + .36*Math.sin(now/1700))) + "px");
+  spot.style.setProperty("--y", (r.height*(.5 + .3*Math.sin(now/1100))) + "px");
+})(0);
+
+/* ---------- Reveal on scroll ---------- */
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }), {threshold:.15});
+document.querySelectorAll(".rv").forEach(el => io.observe(el));
+
+/* ---------- Booking form → opens the visitor's email app ---------- */
+document.getElementById("form").addEventListener("submit", e => {
+  e.preventDefault();
+  const f = e.target, note = document.getElementById("note");
+  if (!f.name.value.trim() || !/^\S+@\S+\.\S+$/.test(f.email.value)){ note.textContent = "Pop in your name and a valid email first."; return; }
+  const needs = [...f.querySelectorAll("[name=need]:checked")].map(c => c.value).join(", ") || "Not sure yet";
+  const vtype = (f.querySelector("[name=vtype]:checked") || {}).value || "Not specified";
+  const body = `Name: ${f.name.value}\nEmail: ${f.email.value}\nVenue: ${f.venue.value || "TBC"} (${vtype})\nTown/city: ${f.town.value || "TBC"}\nNeeds: ${needs}\n\n${f.msg.value}`;
+  location.href = `mailto:${BOOKING_EMAIL}?subject=${encodeURIComponent("Venue enquiry – " + (f.venue.value || f.name.value))}&body=${encodeURIComponent(body)}`;
+  note.textContent = "Opening your email app… ⚡";
+});
+</script>
+</body>
+</html>
